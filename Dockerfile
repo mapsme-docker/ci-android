@@ -13,6 +13,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
 # Installing packages
 RUN apt-get install -y \
     bash \
+    curl \
     openjdk-8-jdk \
     python \
     unzip \
