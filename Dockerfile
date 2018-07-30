@@ -32,5 +32,13 @@ RUN \
 RUN yes | /usr/local/android/tools/bin/sdkmanager "ndk-bundle" "platforms;android-23" "platforms;android-26" "build-tools;27.0.3" "cmake;3.6.4111459" "platform-tools"
 RUN chmod -R 0777 /usr/local/android
 
+# Install gradle
+RUN wget --no-check-certificate \
+    https://services.gradle.org/distributions/gradle-4.9-bin.zip && \
+    unzip gradle-4.9-bin.zip -d /usr/local && \
+    rm gradle-4.9-bin.zip && \
+    chmod -R 0777 /usr/local/gradle-4.9
+
+
 ENV ANDROID_HOME /usr/local/android
-ENV PATH $PATH:$ANDROID_HOME/ndk-bundle
+ENV PATH $PATH:$ANDROID_HOME/ndk-bundle:/usr/local/gradle-4.9/bin
