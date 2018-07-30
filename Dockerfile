@@ -14,6 +14,7 @@ RUN rm -rf /var/lib/apt/lists/* && \
 RUN apt-get install -y \
     bash \
     curl \
+    locales \
     openjdk-8-jdk \
     python \
     unzip \
@@ -34,11 +35,15 @@ RUN chmod -R 0777 /usr/local/android
 
 # Install gradle
 RUN wget --no-check-certificate \
-    https://services.gradle.org/distributions/gradle-4.9-bin.zip && \
-    unzip gradle-4.9-bin.zip -d /usr/local && \
-    rm gradle-4.9-bin.zip && \
-    chmod -R 0777 /usr/local/gradle-4.9
+    https://services.gradle.org/distributions/gradle-4.4-bin.zip && \
+    unzip gradle-4.4-bin.zip -d /usr/local && \
+    rm gradle-4.4-bin.zip && \
+    chmod -R 0777 /usr/local/gradle-4.4
+
+# Install locale
+RUN locale-gen en_US.UTF-8
 
 
 ENV ANDROID_HOME /usr/local/android
-ENV PATH $PATH:$ANDROID_HOME/ndk-bundle:/usr/local/gradle-4.9/bin
+ENV PATH $PATH:$ANDROID_HOME/ndk-bundle:/usr/local/gradle-4.4/bin
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
