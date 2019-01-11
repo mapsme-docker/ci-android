@@ -14,8 +14,8 @@ RUN yum install -y \
     java-1.8.0-openjdk \
     unzip \
     wget
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 RUN yum install -y \
+    https://centos7.iuscommunity.org/ius-release.rpm \
     python36u python36u-pip \
     centos-release-scl-rh \
     devtoolset-6-libquadmath-devel \
