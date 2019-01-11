@@ -10,13 +10,11 @@ RUN yum install -y \
     locales \
     which \
     openjdk-8-jdk \
-    python36u-devel \
+    epel-release \
+    python36 \
     java-1.8.0-openjdk \
     unzip \
-    wget
-RUN yum install -y \
-    https://centos7.iuscommunity.org/ius-release.rpm \
-    python36u python36u-pip \
+    wget \
     centos-release-scl-rh \
     devtoolset-6-libquadmath-devel \
     numpy \
