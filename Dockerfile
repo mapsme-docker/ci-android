@@ -5,17 +5,17 @@ MAINTAINER  Ukhanov Anton a.ukhanov@corp.mail.ru
 ENV DEBIAN_FRONTEND noninteractive
 
 # Installing packages
+RUN yum install -y epel-release
+RUN yum install -y centos-release-scl-rh 
 RUN yum install -y \
     curl \
     locales \
     which \
     openjdk-8-jdk \
-    epel-release \
     python36 \
     java-1.8.0-openjdk \
     unzip \
     wget \
-    centos-release-scl-rh \
     devtoolset-6-libquadmath-devel \
     numpy \
     scipy
