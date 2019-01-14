@@ -1,9 +1,6 @@
 FROM        centos:7
 MAINTAINER  Ukhanov Anton a.ukhanov@corp.mail.ru
 
-# Never ask for confirmations
-ENV DEBIAN_FRONTEND noninteractive
-
 # Installing packages
 RUN yum install -y epel-release
 RUN yum install -y centos-release-scl-rh 
@@ -16,12 +13,8 @@ RUN yum install -y \
     java-1.8.0-openjdk \
     unzip \
     wget \
-    devtoolset-6-libquadmath-devel \
-    numpy \
-    scipy
-
-RUN export JAVA_HOME=/usr/bin/java
-
+    devtoolset-6-libquadmath-devel 
+    
 RUN yum-config-manager --add-repo http://pkg.corp.mail.ru/centos/6/mapsme/mapsme.repo
 RUN yum install -y boost_prefix168*
 # Install Android SDK
