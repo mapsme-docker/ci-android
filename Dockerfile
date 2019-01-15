@@ -1,26 +1,22 @@
-FROM        ubuntu:18.04
-MAINTAINER  greshilov slavik greshilov@maps.me
-
-# Never ask for confirmations
-ENV DEBIAN_FRONTEND noninteractive
-
-# Update apt-get
-RUN rm -rf /var/lib/apt/lists/* && \
-    apt-get update && \
-    apt-get dist-upgrade -y
-
+FROM        centos:7
+MAINTAINER  Ukhanov Anton a.ukhanov@corp.mail.ru
 
 # Installing packages
-RUN apt-get install -y \
-    bash \
+RUN yum install -y epel-release
+RUN yum install -y centos-release-scl-rh 
+RUN yum install -y \
     curl \
     locales \
+    which \
     openjdk-8-jdk \
-    python \
+    python36 \
+    java-1.8.0-openjdk \
     unzip \
     wget \
-    --no-install-recommends
-
+    devtoolset-6-libquadmath-devel 
+    
+RUN yum-config-manager --add-repo http://pkg.corp.mail.ru/centos/6/mapsme/mapsme.repo
+RUN yum install -y boost_prefix168*
 # Install Android SDK
 RUN \
     wget --no-check-certificate \
@@ -30,7 +26,8 @@ RUN \
     rm sdk-tools-linux-3859397.zip
 
 # Configure SDK
-RUN yes | /usr/local/android/tools/bin/sdkmanager "ndk-bundle" "platforms;android-23" "platforms;android-26" "build-tools;27.0.3" "cmake;3.6.4111459" "platform-tools"
+RUN /usr/local/android/tools/bin/sdkmanager "ndk-bundle" "platforms;android-23" "platforms;android-26" "build-tools;27.0.3" "cmake;3.6.4111459" "platform-tools"
+
 RUN chmod -R 0777 /usr/local/android
 
 # Install gradle
@@ -39,9 +36,6 @@ RUN wget --no-check-certificate \
     unzip gradle-4.4-bin.zip -d /usr/local && \
     rm gradle-4.4-bin.zip && \
     chmod -R 0777 /usr/local/gradle-4.4
-
-# Install locale
-RUN locale-gen en_US.UTF-8
 
 
 ENV ANDROID_HOME /usr/local/android
