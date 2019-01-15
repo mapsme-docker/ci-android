@@ -26,7 +26,7 @@ RUN \
     rm sdk-tools-linux-3859397.zip
 
 # Configure SDK
-RUN /usr/local/android/tools/bin/sdkmanager "ndk-bundle" "platforms;android-23" "platforms;android-26" "build-tools;27.0.3" "cmake;3.6.4111459" "platform-tools"
+RUN yes | /usr/local/android/tools/bin/sdkmanager "ndk-bundle" "platforms;android-23" "platforms;android-26" "build-tools;27.0.3" "cmake;3.6.4111459" "platform-tools"
 
 RUN chmod -R 0777 /usr/local/android
 
